@@ -13,11 +13,13 @@
  reducers you can combine them by initializng a `MainReducer` with all of your reducers as an
  argument.
  */
-open class Store<State: StateType>: StoreType {
+import Combine
+
+open class Store<State: StateType>: StoreType, ObservableObject {
 
     typealias SubscriptionType = SubscriptionBox<State>
 
-    private(set) public var state: State! {
+    @Published public var state: State! {
         didSet {
             subscriptions.forEach {
                 if $0.subscriber == nil {
