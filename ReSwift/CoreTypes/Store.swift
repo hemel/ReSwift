@@ -114,7 +114,7 @@ open class Store<State: StateType>: StoreType, ObservableObject {
 
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
-            _ = subscribe(subscriber, transform: nil)
+            subscribe(subscriber, transform: nil)
     }
 
     open func subscribe<SelectedState, S: StoreSubscriber>(
@@ -238,9 +238,9 @@ extension Store where State: Equatable {
     open func subscribe<S: StoreSubscriber>(_ subscriber: S)
         where S.StoreSubscriberStateType == State {
             guard subscriptionsAutomaticallySkipRepeats else {
-                _ = subscribe(subscriber, transform: nil)
+                subscribe(subscriber, transform: nil)
                 return
             }
-            _ = subscribe(subscriber, transform: { $0.skipRepeats() })
+            subscribe(subscriber, transform: { $0.skipRepeats() })
     }
 }
